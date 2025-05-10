@@ -10,7 +10,10 @@ function uint8ToStr(uint8: Uint8Array): string {
 }
 
 async function getKey(): Promise<CryptoKey> {
-  return crypto.subtle.importKey("raw", strToUint8(SECRET), { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
+  return crypto.subtle.importKey("raw", strToUint8(SECRET), { name: "AES-GCM" }, false, [
+    "encrypt",
+    "decrypt",
+  ]);
 }
 
 export async function encryptData(text: string): Promise<string> {

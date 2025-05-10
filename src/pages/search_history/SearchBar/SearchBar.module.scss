@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  .button {
+    height: 36px;
+    text-transform: none !important;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  padding-top: 5px;
+}

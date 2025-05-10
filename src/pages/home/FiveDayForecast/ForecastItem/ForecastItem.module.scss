@@ -1,0 +1,31 @@
+.forecastItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  .time {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .temperature {
+      font-size: 12px;
+      color: gray;
+    }
+  }
+
+  .weather {
+    flex: 1;
+    text-align: right;
+    font-weight: bold;
+    font-size: 12px;
+  }
+}

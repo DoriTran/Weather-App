@@ -1,0 +1,16 @@
+.historyItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+
+  .itemInfo {
+    font-size: 16px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 6px;
+  }
+}
