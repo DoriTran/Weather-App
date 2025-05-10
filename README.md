@@ -1,46 +1,71 @@
-# Getting Started with Create React App
+# Weather Forecast App ☀️🌦️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ⚠️ Setup Notice
 
-## Available Scripts
+Before running the app, **please make sure to place the provided `.env` file at the root level (same level as the `src` folder, _not_ inside it)**.
 
-In the project directory, you can run:
+> This is important because the `.env` file contains a **secure API key** that should not be exposed publicly. As a result, it has not been pushed to GitHub and was shared via email instead.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## ✅ Feature Progress Report
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### • Current Weather Summary
+- ✅ Display current date
+- ✅ Show weather icon and description
+- ✅ Show temperature, humidity, wind speed with arrow direction, and visibility  
+**Progress:** 100% Complete
 
-### `npm test`
+### • 5-day Forecast (Every 3 Hours)
+- ✅ Display forecast in 24-hour format with date, icon, min/max temperature, and description
+- ✅ Filter and group forecast data into "Today" and following days  
+**Progress:** 100% Complete
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### • Search & History
+- ✅ Search input with real-time search capability
+- ✅ Navigate to Home and update weather if valid
+- ✅ Show error message if the search is invalid
+- ✅ Save search history in local storage
+- ✅ Navigate to weather from history item
+- ✅ Allow deleting search history items  
+**Progress:** 100% Complete
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📊 Evaluation Report
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### ✔ Feature Completeness
+- All requested features fully implemented and functional
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🧱 Code Structure & Reusability
+- Componentized and modular using `module.scss`
+- Types are defined in separate reusable files
+- Shared components are cleanly abstracted
 
-### `npm run eject`
+### 🎨 Consistent Styling
+- Layout and UI styling follow the mockup closely
+- Consistent font sizing, spacing, and reused color palette
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 📁 Folder Structure
+- Follows a clean, scalable TypeScript + React project layout
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🧼 Code Readability & Quality
+- Clean code practices: naming, structure, simplicity
+- Integrated ESLint and Prettier for consistent formatting
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 🚀 Performance & Optimization
+- Minimized unnecessary re-renders
+- Optimized array iteration and filtering
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 🌐 Web Standards
+- **Secure API key**: not exposed publicly (via `.env`)
+- **Local Storage**: safely stores history using browser-native encryption
+- **Error Handling**: graceful failures via `try/catch` where needed
 
-## Learn More
+### 📱 Responsive Design
+- Supports various screen sizes (mobile, tablet, small laptop)
+- Layout adapts while maintaining design fidelity to the mockup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For questions or feedback, feel free to reach out. Thank you for reviewing the project!
