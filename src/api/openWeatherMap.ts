@@ -1,39 +1,54 @@
 import { api } from "./index";
+import type { GeoCity, CurrentWeather, ForecastResponse } from "types/weather";
 
 const GEO_BASE_URL = "/geo/1.0/direct";
 const WEATHER_BASE_URL = "/data/2.5/weather";
 const FORCAST = "/data/2.5/forecast";
 
-// Add types for the API responses
-export const getCoordinates = async (search: string) => {
-  const { data } = await api.get(GEO_BASE_URL, {
-    params: {
-      q: search,
-      limit: 1,
-    },
-  });
+export const getCoordinates = async (search: string): Promise<GeoCity[]> => {
+  try {
+    const { data } = await api.get(GEO_BASE_URL, {
+      params: {
+        q: search,
+        limit: 1,
+      },
+    });
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch coordinates:", error);
+    throw error;
+  }
 };
 
-export const getWeather = async (lat: number, lon: number) => {
-  const { data } = await api.get(WEATHER_BASE_URL, {
-    params: {
-      lat,
-      lon,
-    },
-  });
+export const getWeather = async (lat: number, lon: number): Promise<CurrentWeather> => {
+  try {
+    const { data } = await api.get(WEATHER_BASE_URL, {
+      params: {
+        lat,
+        lon,
+      },
+    });
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch current weather:", error);
+    throw error;
+  }
 };
 
-export const getForecast = async (lat: number, lon: number) => {
-  const { data } = await api.get(FORCAST, {
-    params: {
-      lat,
-      lon,
-    },
-  });
+export const getForecast = async (lat: number, lon: number): Promise<ForecastResponse> => {
+  try {
+    const { data } = await api.get(FORCAST, {
+      params: {
+        lat,
+        lon,
+      },
+    });
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch forecast:", error);
+    throw error;
+  }
 };
