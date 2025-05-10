@@ -1,3 +1,5 @@
+@import "App.scss";
+
 .container {
   width: 100%;
   display: flex;
@@ -5,9 +7,21 @@
   gap: 30px;
 
   .dayWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+
+    @media (min-width: $screen-tablets) {
+      gap: 3px;
+    }
+
+    @media (min-width: $screen-laptops) {
+      gap: 5px;
+    }
+
     .date {
       color: gray;
-      font-size: 14px;
+      font-size: 1rem;
       padding-bottom: 10px;
     }
   }

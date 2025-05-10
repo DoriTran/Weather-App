@@ -14,7 +14,7 @@ const ForecastItem: FC<ForecastItemProps> = ({ time, icon, temperature, weather 
     <div className={styles.forecastItem}>
       <div className={styles.time}>{time}</div>
       <div className={styles.center}>
-        <Icon icon={icon} size={40} />
+        <Icon icon={icon} size="2.5rem" />
         <div className={styles.temperature}>{temperature}</div>
       </div>
       <div className={styles.weather}>{weather}</div>

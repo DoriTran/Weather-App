@@ -82,7 +82,7 @@ export const getForecast = async (lat: number, lon: number): Promise<ForecastRes
     });
 
     // Separate the data into days
-    const today = moment().format("YYYY-MM-DD");
+    const today = moment(list[0].dt_txt).format("YYYY-MM-DD");
     const forecast: ForecastResponse = {
       list: Object.entries(grouped).map(([key, items]) => ({
         date: key === today ? "Today" : moment(key).format("D MMMM"),

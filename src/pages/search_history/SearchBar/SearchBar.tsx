@@ -13,40 +13,27 @@ const SearchBar = () => {
   const [isNoResults, setIsNoResults] = useState<boolean>(false);
   const addHistory = useStoreHistory((state: StoreHistoryType) => state.addHistory);
 
-  const {
-    data: searchResults,
-    isLoading,
-    isError,
-    refetch: search,
-  } = useQuery<GeoCity[], Error>({
+  const { isError, refetch: search } = useQuery<GeoCity[], Error>({
     queryKey: ["coordinates", searchText],
     queryFn: () => getCoordinates(searchText),
     enabled: false,
     retry: false,
   });
 
-  useEffect(() => {
-    const updateHistory = async () => {
-      if (!isLoading) {
-        if (searchResults?.length === 0) {
-          setIsNoResults(true);
-        } else {
-          setIsNoResults(false);
-          if (searchResults) {
-            await addHistory({
-              name: searchResults[0].name,
-              country: searchResults[0].country,
-              lat: searchResults[0].lat,
-              lon: searchResults[0].lon,
-            });
-            navigate("/home");
-          }
-        }
-      }
-    };
-
-    updateHistory();
-  }, [isLoading]);
+  const handleSearch = async () => {
+    const { data } = await search();
+    if (data && data.length > 0) {
+      await addHistory({
+        name: data[0].name,
+        country: data[0].country,
+        lat: data[0].lat,
+        lon: data[0].lon,
+      });
+      navigate("/home");
+    } else {
+      setIsNoResults(true);
+    }
+  };
 
   useEffect(() => {
     if (isNoResults) setIsNoResults(false);
@@ -66,7 +53,7 @@ const SearchBar = () => {
           className={styles.input}
           placeholder="Search contry or city here..."
         />
-        <Button variant="contained" className={styles.button} onClick={() => search()}>
+        <Button variant="contained" className={styles.button} onClick={handleSearch}>
           Search
         </Button>
       </div>

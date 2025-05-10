@@ -41,16 +41,12 @@
       }
 
       .location {
-        font-size: 1.2rem;
+        font-size: 22px;
         font-weight: 600;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
         max-width: 80%;
-      }
-
-      .search {
-        font-size: 1.2rem;
         cursor: pointer;
       }
     }

@@ -1,3 +1,5 @@
+@import "App.scss";
+
 .forecastItem {
   display: flex;
   flex-direction: row;
@@ -7,7 +9,21 @@
 
   .time {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 0.9rem;
+    width: 10%;
+    transition: margin-left 0.3s ease;
+
+    @media (min-width: $screen-phones) {
+      margin-left: 10px;
+    }
+
+    @media (min-width: $screen-tablets) {
+      margin-left: 15px;
+    }
+
+    @media (min-width: $screen-laptops) {
+      margin-left: 20px;
+    }
   }
 
   .center {
@@ -17,7 +33,7 @@
     align-items: center;
 
     .temperature {
-      font-size: 12px;
+      font-size: 0.85rem;
       color: gray;
     }
   }
@@ -26,7 +42,7 @@
     flex: 1;
     text-align: right;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 0.9rem;
     text-transform: capitalize;
   }
 }

@@ -35,7 +35,7 @@ const WeatherDisplay: FC<WeatherDisplayType> = ({ location }) => {
       <div className={styles.center}>
         <div className={styles.weatherIcon}>
           {weather?.icon ? (
-            <Icon icon={weather.icon} size={100} />
+            <Icon icon={weather.icon} size="8rem" />
           ) : (
             <Icon icon={faSpinner} size={50} />
           )}

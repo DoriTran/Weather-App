@@ -1,8 +1,10 @@
+@import "App.scss";
+
 .container {
   width: 100%;
 
   .time {
-    font-size: 14px;
+    font-size: 1rem;
   }
 
   .center {
@@ -10,8 +12,17 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0 px;
+    padding: 0;
     gap: 25px;
+    transition: height 0.3s ease;
+
+    @media (min-width: $screen-tablets) {
+      padding: 5px 0;
+    }
+
+    @media (min-width: $screen-laptops) {
+      padding: 10px 0;
+    }
 
     .weatherIcon {
       width: 50%;
@@ -27,12 +38,12 @@
       width: 50%;
 
       .temp {
-        font-size: 35px;
+        font-size: 2.5rem;
         font-weight: 600;
       }
 
       .weather {
-        font-size: 14px;
+        font-size: 1rem;
         text-transform: capitalize;
       }
     }
@@ -41,7 +52,7 @@
   .bottom {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     gap: 15px;
     margin: 0 25px;
@@ -53,15 +64,15 @@
       gap: 5px;
 
       .type {
-        font-size: 12px;
+        font-size: 1rem;
         font-weight: 300;
       }
 
       .value {
-        font-size: 12px;
+        font-size: 0.9rem;
 
         .unit {
-          font-size: 10px;
+          font-size: 0.8rem;
         }
       }
     }
