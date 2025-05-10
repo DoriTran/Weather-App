@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CSSProperties, FC } from "react";
 import { IconProps } from "./IconType";
 
-const Icon: FC<IconProps> = ({ icon, color, size, ...restProps }) => {
+const Icon: FC<IconProps> = ({ icon, color, size, rotate, ...restProps }) => {
   const style: CSSProperties = {
     ...(size && { fontSize: size, height: size, width: size }),
     cursor: restProps.onClick ? "pointer" : "unset",
@@ -25,6 +25,9 @@ const Icon: FC<IconProps> = ({ icon, color, size, ...restProps }) => {
       {...restProps}
       style={{
         ...(size && { fontSize: size }),
+        ...(typeof rotate === "number" && {
+          transform: `rotate(${rotate}deg)`,
+        }),
         cursor: restProps.onClick ? "pointer" : "unset",
         ...restProps.style,
       }}

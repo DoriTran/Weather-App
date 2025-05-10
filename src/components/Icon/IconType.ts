@@ -4,5 +4,6 @@ export interface IconProps {
   icon: IconProp | string;
   color?: string;
   size?: number | string;
+  rotate?: number;
   [key: string]: any;
 }

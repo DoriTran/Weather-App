@@ -9,7 +9,7 @@ export interface GeoCity {
   state?: string;
 }
 
-export interface CurrentWeather {
+export interface NotFormatedCurrentWeather {
   coord: {
     lon: number;
     lat: number;
@@ -56,6 +56,16 @@ export interface CurrentWeather {
   id: number;
   name: string;
   cod: number;
+}
+
+export interface CurrentWeather {
+  icon: string;
+  temp: number;
+  description: string;
+  humidity: number;
+  windSpeed: number;
+  windDeg: number;
+  visibility: number;
 }
 
 export interface ForecastItem {

@@ -11,6 +11,7 @@ export const getCoordinates = async (search: string): Promise<GeoCity[]> => {
       params: {
         q: search,
         limit: 1,
+        units: "metric",
       },
     });
 
@@ -27,10 +28,19 @@ export const getWeather = async (lat: number, lon: number): Promise<CurrentWeath
       params: {
         lat,
         lon,
+        units: "metric",
       },
     });
 
-    return data;
+    return {
+      icon: data.weather[0].icon,
+      temp: Math.round(data.main.temp),
+      description: data.weather[0].description,
+      humidity: data.main.humidity,
+      windSpeed: data.wind.speed,
+      windDeg: (data.wind.deg + 180) % 360,
+      visibility: data.visibility / 1000,
+    };
   } catch (error) {
     console.error("Failed to fetch current weather:", error);
     throw error;

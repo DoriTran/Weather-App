@@ -41,9 +41,8 @@ const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unknown]]>
           console.error("Failed to encrypt on add:", error);
         }
       },
-      removeHistory: async (id: number | undefined): Promise<void> => {
+      removeHistory: async (id: number): Promise<void> => {
         try {
-          if (id === undefined) return;
           const current = await get().getHistory();
           const updated = current.filter((item: HistorySearch) => item.id !== id);
           const encrypted = await encryptData(JSON.stringify(updated));

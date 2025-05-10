@@ -1,12 +1,15 @@
-import CurrentWeather from "./CurrentWeather/CurrentWeather";
+import useWeatherLocation from "hooks/useWeatherLocation";
+import WeatherDisplay from "./WeatherDisplay/WeatherDisplay";
 import FiveDayForecast from "./FiveDayForecast/FiveDayForecast";
 import styles from "./HomePage.module.scss";
 
 const HomePage = () => {
+  const weatherLocation = useWeatherLocation();
+
   return (
     <div className={styles.layout}>
-      <CurrentWeather />
-      <FiveDayForecast />
+      <WeatherDisplay location={weatherLocation} />
+      <FiveDayForecast location={weatherLocation} />
     </div>
   );
 };

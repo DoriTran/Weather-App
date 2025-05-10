@@ -1,8 +1,15 @@
 import { Label, Paper } from "components";
 import styles from "./FiveDayForecast.module.scss";
 import ForecastItem from "./ForecastItem/ForecastItem";
+import { FC } from "react";
+import { WeatherLocationType } from "types/hooks";
 
-const FiveDayForecast = () => {
+interface FiveDayForecastType {
+  location: WeatherLocationType;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const FiveDayForecast: FC<FiveDayForecastType> = ({ location }) => {
   return (
     <>
       <Label>5-day Forecast (3 Hours)</Label>
