@@ -3,8 +3,9 @@ import { persist } from "zustand/middleware";
 import { encryptData, decryptData } from "utils/encryption";
 import { StoreHistoryType } from "./storeHistoryType";
 import { HistorySearch } from "types/history";
+import { v4 as uuidv4 } from "uuid";
 
-export const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unknown]]>(
+const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unknown]]>(
   persist(
     (set, get) => ({
       encryptedHistory: "",
@@ -32,19 +33,17 @@ export const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unk
       },
       addHistory: async (history: HistorySearch): Promise<void> => {
         try {
-          console.log("Adding history:", history);
           const current = await get().getHistory();
-          const updated = [...current, history];
+          const updated = [{ ...history, id: uuidv4() }, ...current];
           const encrypted = await encryptData(JSON.stringify(updated));
           set({ encryptedHistory: encrypted });
         } catch (error) {
           console.error("Failed to encrypt on add:", error);
-          console.log("History attempted to save:", history);
-          // console.error("Failed to encrypt on add:", error);
         }
       },
-      removeHistory: async (id: number): Promise<void> => {
+      removeHistory: async (id: number | undefined): Promise<void> => {
         try {
+          if (id === undefined) return;
           const current = await get().getHistory();
           const updated = current.filter((item: HistorySearch) => item.id !== id);
           const encrypted = await encryptData(JSON.stringify(updated));
@@ -59,3 +58,5 @@ export const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unk
     },
   ),
 );
+
+export default useStoreHistory;

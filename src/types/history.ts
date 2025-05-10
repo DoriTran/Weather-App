@@ -1,5 +1,7 @@
 export interface HistorySearch {
-  id: number;
+  id?: number;
   name: string;
   country: string;
+  lat: number;
+  lon: number;
 }

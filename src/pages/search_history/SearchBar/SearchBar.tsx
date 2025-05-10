@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getCoordinates } from "api/openWeatherMap";
 import { GeoCity } from "types/weather";
-import { useStoreHistory } from "store/storeHistory";
 import styles from "./SearchBar.module.scss";
+import { StoreHistoryType, useStoreHistory } from "store";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
+  const navigate: NavigateFunction = useNavigate();
   const [searchText, setSearchText] = useState<string>("");
   const [isNoResults, setIsNoResults] = useState<boolean>(false);
-  const addHistory = useStoreHistory((state) => state.addHistory);
+  const addHistory = useStoreHistory((state: StoreHistoryType) => state.addHistory);
 
   const {
     data: searchResults,
@@ -32,10 +34,12 @@ const SearchBar = () => {
           setIsNoResults(false);
           if (searchResults) {
             await addHistory({
-              id: 0,
               name: searchResults[0].name,
               country: searchResults[0].country,
+              lat: searchResults[0].lat,
+              lon: searchResults[0].lon,
             });
+            navigate("/home");
           }
         }
       }
