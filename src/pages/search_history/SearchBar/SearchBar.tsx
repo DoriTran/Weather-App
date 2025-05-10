@@ -63,6 +63,7 @@ const SearchBar = () => {
               padding: "7px 14px",
             },
           }}
+          className={styles.input}
           placeholder="Search contry or city here..."
         />
         <Button variant="contained" className={styles.button} onClick={() => search()}>

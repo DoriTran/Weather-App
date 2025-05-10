@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getWeather } from "api/openWeatherMap";
 import useCurrentTime from "hooks/useCurrentTime";
 import { WeatherLocationType } from "types/hooks";
-import { faArrowUp, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 interface WeatherDisplayType {
   location: WeatherLocationType;
@@ -34,7 +34,11 @@ const WeatherDisplay: FC<WeatherDisplayType> = ({ location }) => {
       <div className={styles.time}>{time}</div>
       <div className={styles.center}>
         <div className={styles.weatherIcon}>
-          <Icon icon={weather?.icon || faQuestion} size={100} />
+          {weather?.icon ? (
+            <Icon icon={weather.icon} size={100} />
+          ) : (
+            <Icon icon={faSpinner} size={50} />
+          )}
         </div>
         <div className={styles.centerItem}>
           <div className={styles.temp}>{weather?.temp}°C</div>

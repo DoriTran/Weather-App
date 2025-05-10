@@ -4,13 +4,19 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
+  gap: 25px;
 
   .itemInfo {
     font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: calc(100% - 50px);
   }
 
   .actions {
     display: flex;
+    width: 50px;
     gap: 6px;
   }
 }
