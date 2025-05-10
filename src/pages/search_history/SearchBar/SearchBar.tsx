@@ -1,13 +1,15 @@
-import { Button, CircularProgress, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getCoordinates } from "api/openWeatherMap";
-import styles from "./SearchBar.module.scss";
 import { GeoCity } from "types/weather";
+import { useStoreHistory } from "store/storeHistory";
+import styles from "./SearchBar.module.scss";
 
 const SearchBar = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [isNoResults, setIsNoResults] = useState<boolean>(false);
+  const addHistory = useStoreHistory((state) => state.addHistory);
 
   const {
     data: searchResults,
@@ -22,10 +24,24 @@ const SearchBar = () => {
   });
 
   useEffect(() => {
-    if (!isLoading) {
-      if (searchResults?.length === 0) setIsNoResults(true);
-      else setIsNoResults(false);
-    }
+    const updateHistory = async () => {
+      if (!isLoading) {
+        if (searchResults?.length === 0) {
+          setIsNoResults(true);
+        } else {
+          setIsNoResults(false);
+          if (searchResults) {
+            await addHistory({
+              id: 0,
+              name: searchResults[0].name,
+              country: searchResults[0].country,
+            });
+          }
+        }
+      }
+    };
+
+    updateHistory();
   }, [isLoading]);
 
   useEffect(() => {
@@ -46,7 +62,7 @@ const SearchBar = () => {
           placeholder="Search contry or city here..."
         />
         <Button variant="contained" className={styles.button} onClick={() => search()}>
-          {isLoading ? <CircularProgress size={24} /> : "Search"}
+          Search
         </Button>
       </div>
       {(isError || isNoResults) && <div className={styles.error}>Invalid country or city</div>}

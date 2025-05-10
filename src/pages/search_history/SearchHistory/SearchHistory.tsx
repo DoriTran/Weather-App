@@ -7,11 +7,11 @@ const SearchHistory = () => {
     <>
       <Label>5-day Forecast (3 Hours)</Label>
       <Paper className={styles.container}>
-        <HistoryItem city="Sydney" country="AU" />
-        <HistoryItem city="Sydney" country="AU" />
-        <HistoryItem city="Sydney" country="AU" />
-        <HistoryItem city="Sydney" country="AU" />
-        <HistoryItem city="Sydney" country="AU" />
+        <HistoryItem name="Sydney" country="AU" />
+        <HistoryItem name="Sydney" country="AU" />
+        <HistoryItem name="Sydney" country="AU" />
+        <HistoryItem name="Sydney" country="AU" />
+        <HistoryItem name="Sydney" country="AU" />
       </Paper>
     </>
   );

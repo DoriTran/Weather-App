@@ -1,4 +1,4 @@
-const SECRET = process.env.REACT_APP_SALT_FOR_ENCRYPTION || "default-secret";
+const SECRET = process.env.REACT_APP_SALT_FOR_ENCRYPTION || "default-secret-key";
 const ivLength = 12;
 
 function strToUint8(str: string): Uint8Array {
@@ -10,10 +10,20 @@ function uint8ToStr(uint8: Uint8Array): string {
 }
 
 async function getKey(): Promise<CryptoKey> {
-  return crypto.subtle.importKey("raw", strToUint8(SECRET), { name: "AES-GCM" }, false, [
-    "encrypt",
-    "decrypt",
-  ]);
+  console.log("Subtle:", crypto?.subtle);
+  try {
+    const key = await crypto.subtle.importKey(
+      "raw",
+      strToUint8(SECRET),
+      { name: "AES-GCM" },
+      false,
+      ["encrypt", "decrypt"],
+    );
+    return key;
+  } catch (error) {
+    console.error("Failed to import key:", error);
+    throw error; // rethrow so you can see stack trace
+  }
 }
 
 export async function encryptData(text: string): Promise<string> {

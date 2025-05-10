@@ -2,5 +2,4 @@ export interface HistorySearch {
   id: number;
   name: string;
   country: string;
-  city: string;
 }

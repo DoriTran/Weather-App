@@ -20,7 +20,7 @@ const Outlet = () => {
   }, [getLastSearch]);
 
   const lastSearchText: string = lastSearch
-    ? `${lastSearch.city}, ${lastSearch.country}`
+    ? `${lastSearch.name}, ${lastSearch.country}`
     : "Search for a location";
 
   return (

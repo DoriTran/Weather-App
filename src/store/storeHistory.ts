@@ -32,12 +32,15 @@ export const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unk
       },
       addHistory: async (history: HistorySearch): Promise<void> => {
         try {
+          console.log("Adding history:", history);
           const current = await get().getHistory();
           const updated = [...current, history];
           const encrypted = await encryptData(JSON.stringify(updated));
           set({ encryptedHistory: encrypted });
         } catch (error) {
           console.error("Failed to encrypt on add:", error);
+          console.log("History attempted to save:", history);
+          // console.error("Failed to encrypt on add:", error);
         }
       },
       removeHistory: async (id: number): Promise<void> => {
