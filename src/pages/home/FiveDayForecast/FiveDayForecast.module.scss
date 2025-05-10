@@ -1,9 +1,14 @@
 .container {
   width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 
-  .date {
-    color: gray;
-    font-size: 14px;
-    margin-bottom: 15px;
+  .dayWrapper {
+    .date {
+      color: gray;
+      font-size: 14px;
+      padding-bottom: 10px;
+    }
   }
 }

@@ -1,5 +1,12 @@
+import moment from "moment";
 import { api } from "./index";
-import type { GeoCity, CurrentWeather, ForecastResponse } from "types/weather";
+import type {
+  GeoCity,
+  CurrentWeather,
+  ForecastResponse,
+  ForecastItem,
+  NotFormatedForecastItem,
+} from "types/weather";
 
 const GEO_BASE_URL = "/geo/1.0/direct";
 const WEATHER_BASE_URL = "/data/2.5/weather";
@@ -53,10 +60,37 @@ export const getForecast = async (lat: number, lon: number): Promise<ForecastRes
       params: {
         lat,
         lon,
+        units: "metric",
       },
     });
 
-    return data;
+    const { list } = data;
+    // Handle data to formated data
+    const grouped: Record<string, ForecastItem[]> = {};
+    list.forEach((entry: NotFormatedForecastItem) => {
+      const date = moment(entry.dt_txt);
+      const dayKey = date.format("YYYY-MM-DD");
+
+      if (!grouped[dayKey]) grouped[dayKey] = [];
+
+      grouped[dayKey].push({
+        time: date.format("HH:mm"),
+        icon: entry.weather[0].icon,
+        temp: `${Math.round(entry.main.temp_min)}°C/${Math.round(entry.main.temp_max)}°C`,
+        weather: entry.weather[0].description,
+      });
+    });
+
+    // Separate the data into days
+    const today = moment().format("YYYY-MM-DD");
+    const forecast: ForecastResponse = {
+      list: Object.entries(grouped).map(([key, items]) => ({
+        date: key === today ? "Today" : moment(key).format("D MMMM"),
+        items,
+      })),
+    };
+
+    return forecast;
   } catch (error) {
     console.error("Failed to fetch forecast:", error);
     throw error;

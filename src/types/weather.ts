@@ -68,7 +68,7 @@ export interface CurrentWeather {
   visibility: number;
 }
 
-export interface ForecastItem {
+export interface NotFormatedForecastItem {
   dt: number;
   main: {
     temp: number;
@@ -106,11 +106,11 @@ export interface ForecastItem {
   dt_txt: string;
 }
 
-export interface ForecastResponse {
+export interface NotFormatedForecastResponse {
   cod: string;
   message: number;
   cnt: number;
-  list: ForecastItem[];
+  list: NotFormatedForecastItem[];
   city: {
     id: number;
     name: string;
@@ -124,4 +124,18 @@ export interface ForecastResponse {
     sunrise: number;
     sunset: number;
   };
+}
+
+export interface ForecastItem {
+  time: string;
+  icon: string;
+  temp: string;
+  weather: string;
+}
+
+export interface ForecastResponse {
+  list: {
+    date: string;
+    items: ForecastItem[];
+  }[];
 }

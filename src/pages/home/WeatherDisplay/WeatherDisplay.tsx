@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getWeather } from "api/openWeatherMap";
 import useCurrentTime from "hooks/useCurrentTime";
 import { WeatherLocationType } from "types/hooks";
-import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faQuestion } from "@fortawesome/free-solid-svg-icons";
 
 interface WeatherDisplayType {
   location: WeatherLocationType;
@@ -16,7 +16,6 @@ const WeatherDisplay: FC<WeatherDisplayType> = ({ location }) => {
   const {
     data: weather,
     isLoading,
-    isSuccess,
     refetch,
   } = useQuery<CurrentWeather, Error>({
     queryKey: ["getWeather", location.lat, location.lon],
@@ -28,10 +27,6 @@ const WeatherDisplay: FC<WeatherDisplayType> = ({ location }) => {
     if (!isLoading && location.location !== "Search for a location") refetch();
   }, [location]);
 
-  useEffect(() => {
-    console.log(weather);
-  }, [isSuccess]);
-
   const time = useCurrentTime();
 
   return (
@@ -39,7 +34,7 @@ const WeatherDisplay: FC<WeatherDisplayType> = ({ location }) => {
       <div className={styles.time}>{time}</div>
       <div className={styles.center}>
         <div className={styles.weatherIcon}>
-          <Icon icon={weather?.icon || "faQuestion"} size={100} />
+          <Icon icon={weather?.icon || faQuestion} size={100} />
         </div>
         <div className={styles.centerItem}>
           <div className={styles.temp}>{weather?.temp}°C</div>
