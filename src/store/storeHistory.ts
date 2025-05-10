@@ -8,7 +8,18 @@ export const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unk
   persist(
     (set, get) => ({
       encryptedHistory: "",
-      getHistory: async () => {
+      getLastSearch: async (): Promise<HistorySearch | null> => {
+        try {
+          const encrypted = get().encryptedHistory;
+          if (!encrypted) return null;
+          const decrypted = await decryptData(encrypted);
+          return JSON.parse(decrypted)[0] || null;
+        } catch (error) {
+          console.error("Failed to decrypt history:", error);
+          return null;
+        }
+      },
+      getHistory: async (): Promise<HistorySearch[]> => {
         try {
           const encrypted = get().encryptedHistory;
           if (!encrypted) return [];
@@ -19,7 +30,7 @@ export const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unk
           return [];
         }
       },
-      addHistory: async (history: HistorySearch) => {
+      addHistory: async (history: HistorySearch): Promise<void> => {
         try {
           const current = await get().getHistory();
           const updated = [...current, history];
@@ -29,7 +40,7 @@ export const useStoreHistory = create<StoreHistoryType, [["zustand/persist", unk
           console.error("Failed to encrypt on add:", error);
         }
       },
-      removeHistory: async (id: number) => {
+      removeHistory: async (id: number): Promise<void> => {
         try {
           const current = await get().getHistory();
           const updated = current.filter((item: HistorySearch) => item.id !== id);
