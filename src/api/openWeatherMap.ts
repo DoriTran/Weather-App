@@ -4,6 +4,7 @@ const GEO_BASE_URL = "/geo/1.0/direct";
 const WEATHER_BASE_URL = "/data/2.5/weather";
 const FORCAST = "/data/2.5/forecast";
 
+// Add types for the API responses
 export const getCoordinates = async (search: string) => {
   const { data } = await api.get(GEO_BASE_URL, {
     params: {
